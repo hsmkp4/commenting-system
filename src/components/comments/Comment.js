@@ -1,5 +1,6 @@
 import React from "react";
 import { RxAvatar } from "react-icons/rx";
+import { useSelector } from "react-redux";
 
 const Comment = ({
   id,
@@ -10,9 +11,17 @@ const Comment = ({
   username,
   replyItems,
 }) => {
+  const { users } = useSelector((s) => s.user);
+  const userAvatar = users.find((el) => el.id == userId);
+
   return (
     <div className="flex gap-1">
-      <RxAvatar size={50} color={replyItems ? "#333" : "#999"} />
+      <img
+        src={userAvatar.avatar}
+        alt={userAvatar.name}
+        className="w-20 self-start"
+      />
+      {/* <RxAvatar size={50} color={replyItems ? "#333" : "#999"} /> */}
       <div>
         <div className="flex gap-2">
           <div>{username}</div>

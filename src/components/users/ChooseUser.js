@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { chooseUser } from "../store/userSlice";
+import { chooseUser } from "../../store/userSlice";
 
 const ChooseUser = ({ setIsOpen }) => {
   const { users, currentUser } = useSelector((s) => s.user);
@@ -40,6 +40,7 @@ const ChooseUser = ({ setIsOpen }) => {
           <button
             onClick={handleChangeUser}
             className="border focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:ring-blue-800"
+            disabled={!selected}
           >
             Let's Go
           </button>

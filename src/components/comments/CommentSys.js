@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getData, getParent, getReplies } from "../store/commentsSlice";
+import { getData, getParent, getReplies } from "../../store/commentsSlice";
 import CommentsList from "./CommentsList";
 import CommentForm from "./CommentForm";
 

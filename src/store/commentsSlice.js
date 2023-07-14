@@ -35,8 +35,8 @@ const commentsSlice = createSlice({
     addComment: (s, a) => {
       const newCmt = {
         id: crypto.randomUUID(),
-        username: "hesam",
-        userId: "1",
+        username: a.payload.name,
+        userId: a.payload.id,
         body: a.payload.data,
         parentId: null,
         createdAt: new Date().toISOString(),

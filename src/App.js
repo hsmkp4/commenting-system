@@ -1,7 +1,7 @@
 import { useState } from "react";
-import CommentSys from "./components/CommentSys";
 import NavBar from "./components/NavBar";
-import ChooseUser from "./components/ChooseUser";
+import ChooseUser from "./components/users/ChooseUser";
+import CommentSys from "./components/comments/CommentSys";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(true);
