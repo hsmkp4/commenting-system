@@ -50,6 +50,19 @@ const commentsSlice = createSlice({
     clearToReplyId: (s, a) => {
       s.toReplyId = "";
     },
+    deleteComment: (s, a) => {
+      const { id, parentId } = a.payload;
+      console.log(id, parentId);
+      if (parentId) {
+        const newarr = s.allComments.filter((el) => el.id !== id);
+        s.allComments = newarr;
+      } else {
+        const newarr = s.allComments
+          .filter((el) => el.parentId !== id)
+          .filter((el) => el.id !== id);
+        s.allComments = newarr;
+      }
+    },
   },
   extraReducers: (b) => {
     b.addCase(getData.pending, (s, a) => {
@@ -69,5 +82,6 @@ export const {
   addComment,
   setToReplyId,
   clearToReplyId,
+  deleteComment,
 } = commentsSlice.actions;
 export default commentsSlice.reducer;

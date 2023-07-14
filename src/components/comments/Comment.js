@@ -1,7 +1,6 @@
 import React from "react";
-import { RxAvatar } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
-import { setToReplyId } from "../../store/commentsSlice";
+import { deleteComment, setToReplyId } from "../../store/commentsSlice";
 import CommentForm from "./CommentForm";
 
 const Comment = ({
@@ -12,10 +11,8 @@ const Comment = ({
   userId,
   username,
   replyItems,
-  selectedComment,
-  setSelectedComment,
 }) => {
-  const { users } = useSelector((s) => s.user);
+  const { users, currentUser } = useSelector((s) => s.user);
   const { toReplyId } = useSelector((s) => s.comments);
   const dispatch = useDispatch();
   const userAvatar = users.find((el) => el.id == userId);
@@ -36,6 +33,11 @@ const Comment = ({
         <div>
           {!parentId && (
             <button onClick={() => dispatch(setToReplyId(id))}>Reply</button>
+          )}
+          {userId === currentUser.id && (
+            <button onClick={() => dispatch(deleteComment({ id, parentId }))}>
+              Delete
+            </button>
           )}
           {toReplyId === id && <CommentForm label="Reply" parentId={id} />}
 
