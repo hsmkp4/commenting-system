@@ -13,7 +13,7 @@ const ChooseUser = ({ setIsOpen }) => {
   };
 
   return (
-    <div className="absolute top-0 left-0 w-screen h-screen bg-slate-800/90 flex justify-center items-center">
+    <div className="fixed top-0 left-0 w-screen h-screen bg-slate-800/90 flex justify-center items-center">
       <div className="flex flex-col justify-center items-center gap-4 bg-white w-2/5 h-2/6 p-8  rounded-lg shadow">
         <label htmlFor="">Choose prefered user:</label>
         <select

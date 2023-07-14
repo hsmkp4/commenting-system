@@ -66,7 +66,7 @@ const commentsSlice = createSlice({
   },
   extraReducers: (b) => {
     b.addCase(getData.pending, (s, a) => {
-      //   handle page loading
+      // handle page loading
     });
     b.addCase(getData.fulfilled, (s, a) => {
       s.allComments = a.payload;
