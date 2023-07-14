@@ -17,10 +17,31 @@ const commentsSlice = createSlice({
   initialState,
   reducers: {
     getParent: (s) => {
-      s.parentComments = s.allComments.filter((el) => !el.parentId);
+      s.parentComments = s.allComments
+        .filter((el) => !el.parentId)
+        .sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
     },
     getReplies: (s) => {
-      s.replies = s.allComments.filter((el) => el.parentId);
+      s.replies = s.allComments
+        .filter((el) => el.parentId)
+        .sort(
+          (a, b) =>
+            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        );
+    },
+    addComment: (s, a) => {
+      const newCmt = {
+        id: crypto.randomUUID(),
+        username: "hesam",
+        userId: "1",
+        body: a.payload.data,
+        parentId: null,
+        createdAt: new Date().toISOString(),
+      };
+      s.allComments.push(newCmt);
     },
   },
   extraReducers: (b) => {
@@ -35,5 +56,5 @@ const commentsSlice = createSlice({
     });
   },
 });
-export const { getParent, getReplies } = commentsSlice.actions;
+export const { getParent, getReplies, addComment } = commentsSlice.actions;
 export default commentsSlice.reducer;
