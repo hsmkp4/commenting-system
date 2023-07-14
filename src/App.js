@@ -1,14 +1,11 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getData } from "./store/commentsSlice";
+import CommentSys from "./components/CommentSys";
 
 const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getData());
-  }, []);
-  return <div>App</div>;
+  return (
+    <div>
+      <CommentSys />
+    </div>
+  );
 };
 
 export default App;
