@@ -1,3 +1,8 @@
+import pic1 from "./assets/avatars/abs/abs-07.svg";
+import pic2 from "./assets/avatars/abs/abs-03.svg";
+import pic3 from "./assets/avatars/abs/abs-04.svg";
+import pic4 from "./assets/avatars/abs/abs-02.svg";
+
 export const allComments = [
   {
     id: "1",
@@ -54,5 +59,28 @@ export const allComments = [
     body: "wtf!",
     parentId: "2",
     createdAt: "2023-07-14T08:19:33.010+02:00",
+  },
+];
+
+export const allUsers = [
+  {
+    id: "1",
+    name: "hesam",
+    avatar: pic1,
+  },
+  {
+    id: "2",
+    name: "elham",
+    avatar: pic2,
+  },
+  {
+    id: "3",
+    name: "ava",
+    avatar: pic3,
+  },
+  {
+    id: "4",
+    name: "rama",
+    avatar: pic4,
   },
 ];
