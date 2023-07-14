@@ -6,6 +6,7 @@ const initialState = {
   allComments,
   parentComments: "",
   replies: "",
+  toReplyId: "",
 };
 
 export const getData = createAsyncThunk("comments/getData", async () => {
@@ -38,10 +39,16 @@ const commentsSlice = createSlice({
         username: a.payload.name,
         userId: a.payload.id,
         body: a.payload.data,
-        parentId: null,
+        parentId: a.payload.parentId,
         createdAt: new Date().toISOString(),
       };
       s.allComments.push(newCmt);
+    },
+    setToReplyId: (s, a) => {
+      s.toReplyId = a.payload;
+    },
+    clearToReplyId: (s, a) => {
+      s.toReplyId = "";
     },
   },
   extraReducers: (b) => {
@@ -56,5 +63,11 @@ const commentsSlice = createSlice({
     });
   },
 });
-export const { getParent, getReplies, addComment } = commentsSlice.actions;
+export const {
+  getParent,
+  getReplies,
+  addComment,
+  setToReplyId,
+  clearToReplyId,
+} = commentsSlice.actions;
 export default commentsSlice.reducer;

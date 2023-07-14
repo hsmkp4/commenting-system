@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import Comment from "./Comment";
 
 const CommentsList = () => {
-  const { allComments, parentComments, replies } = useSelector(
-    (s) => s.comments
-  );
+  const { parentComments, replies } = useSelector((s) => s.comments);
   const getRepWithId = (cmtId) => replies.filter((el) => el.parentId === cmtId);
 
   return (
