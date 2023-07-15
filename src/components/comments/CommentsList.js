@@ -12,7 +12,9 @@ const CommentsList = () => {
 
   return (
     <div>
-      <h1>Comments</h1>
+      <h1 className="m-4 text-2xl font-extrabold text-gray-900 dark:text-white ">
+        Comments:
+      </h1>
       {newAddedComments &&
         newAddedComments?.map((el) => (
           <Comment key={el.id} {...el} replyItems={getRepWithId(el.id)} />

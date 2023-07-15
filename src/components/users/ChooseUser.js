@@ -14,8 +14,10 @@ const ChooseUser = ({ setIsOpen }) => {
 
   return (
     <div className="fixed top-0 left-0 w-screen h-screen bg-slate-800/90 flex justify-center items-center">
-      <div className="flex flex-col justify-center items-center gap-4 bg-white w-2/5 h-2/6 p-8  rounded-lg shadow">
-        <label htmlFor="">Choose prefered user:</label>
+      <div className="flex flex-col justify-center items-center gap-4 bg-white w-4/5 h-2/6 p-8 rounded-lg shadow md:w-2/5">
+        <label htmlFor="users" className="text-slate-900">
+          Choose prefered user:
+        </label>
         <select
           name="users"
           id="users"
@@ -33,13 +35,13 @@ const ChooseUser = ({ setIsOpen }) => {
         <div className="flex justify-center gap-2">
           <button
             onClick={() => setIsOpen(false)}
-            className="border focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 border-red-500 text-red-500 hover:text-white hover:bg-red-600 focus:ring-red-900"
+            className="border focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 border-red-500 text-red-500 hover:text-white hover:bg-red-600 focus:ring-red-900"
           >
             Cancel
           </button>
           <button
             onClick={handleChangeUser}
-            className="border focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:ring-blue-800"
+            className="border focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:ring-blue-800"
             disabled={!selected}
           >
             Let's Go
