@@ -20,8 +20,8 @@ const Comment = ({
   return (
     <div className="flex gap-1">
       <img
-        src={userAvatar.avatar}
-        alt={userAvatar.name}
+        src={userAvatar?.avatar}
+        alt={userAvatar?.name}
         className="w-20 self-start"
       />
       <div>

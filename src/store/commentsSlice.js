@@ -1,12 +1,16 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import { allComments } from "../data";
 import axios from "axios";
 
 const initialState = {
   allComments,
   parentComments: "",
+  parentChunk: [],
+  newAddedComments: [],
   replies: "",
   toReplyId: "",
+  firstStep: 0,
+  secondStep: 10,
 };
 
 export const getData = createAsyncThunk("comments/getData", async () => {
@@ -20,19 +24,21 @@ const commentsSlice = createSlice({
     getParent: (s) => {
       s.parentComments = s.allComments
         .filter((el) => !el.parentId)
-        .sort(
+        .toSorted(
           (a, b) =>
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
     },
+
     getReplies: (s) => {
       s.replies = s.allComments
         .filter((el) => el.parentId)
-        .sort(
+        .toSorted(
           (a, b) =>
             new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
         );
     },
+
     addComment: (s, a) => {
       const newCmt = {
         id: crypto.randomUUID(),
@@ -43,25 +49,47 @@ const commentsSlice = createSlice({
         createdAt: new Date().toISOString(),
       };
       s.allComments.push(newCmt);
+      if (!a.payload.parentId) {
+        s.newAddedComments.unshift(newCmt);
+      }
     },
+
     setToReplyId: (s, a) => {
       s.toReplyId = a.payload;
     },
+
     clearToReplyId: (s, a) => {
       s.toReplyId = "";
     },
+
     deleteComment: (s, a) => {
       const { id, parentId } = a.payload;
-      console.log(id, parentId);
       if (parentId) {
-        const newarr = s.allComments.filter((el) => el.id !== id);
-        s.allComments = newarr;
+        const newarrAll = s.allComments.filter((el) => el.id !== id);
+        const newarrParCh = s.parentChunk.filter((el) => el.id !== id);
+        s.allComments = newarrAll;
+        s.parentChunk = newarrParCh;
       } else {
         const newarr = s.allComments
           .filter((el) => el.parentId !== id)
           .filter((el) => el.id !== id);
+        const newarrChunk = s.parentChunk
+          .filter((el) => el.parentId !== id)
+          .filter((el) => el.id !== id);
+        const newarrItem = s.newAddedComments
+          .filter((el) => el.parentId !== id)
+          .filter((el) => el.id !== id);
         s.allComments = newarr;
+        s.parentChunk = newarrChunk;
+        s.newAddedComments = newarrItem;
       }
+    },
+
+    fillParentChunk: (s, a) => {
+      const newItms = s.parentComments.slice(s.firstStep, s.secondStep);
+      s.parentChunk.push(...newItms);
+      s.firstStep = s.secondStep;
+      s.secondStep = s.secondStep + 8;
     },
   },
   extraReducers: (b) => {
@@ -83,5 +111,6 @@ export const {
   setToReplyId,
   clearToReplyId,
   deleteComment,
+  fillParentChunk,
 } = commentsSlice.actions;
 export default commentsSlice.reducer;
